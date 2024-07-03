@@ -1,8 +1,8 @@
-const shortid = require("shortid");
-const URL = require("../models/url.model");
+import { nanoid } from "nanoid";
+import URL from "../models/url.model.js";
 
 async function handleGenerateNewShortUrl(req, res) {
-  const shortID = shortid(8);
+  const shortID = nanoid(8);
   const originalURL = req.body.url;
 
   if (!originalURL) {
@@ -75,8 +75,8 @@ async function handleGetAnalytics(req, res) {
   }
 }
 
-module.exports = {
+export {
   handleGenerateNewShortUrl,
   handleGetShortUrl,
   handleGetAnalytics,
-};
+}

@@ -1,7 +1,7 @@
-const express = require("express");
-const urlRoute = require("./routes/url.routes.js");
-const { connectToMongoDB } = require("./connection.js");
-const dotenv = require("dotenv");
+import express from "express";
+import urlRoute from "./routes/url.routes.js";
+import { connectToMongoDB } from "./connection.js";
+import dotenv from "dotenv";
 
 dotenv.config();
 
