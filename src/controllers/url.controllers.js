@@ -18,7 +18,7 @@ async function handleGenerateNewShortUrl(req, res) {
       visitHistory: [],
     });
     res.status(201).json({
-      shortId: shortID,
+      shortedUrl: `${process.env.BASE_URL}/${shortID}`,
     });
   } catch (error) {
     console.log(error);
@@ -66,7 +66,7 @@ async function handleGetAnalytics(req, res) {
       });
       return;
     }
-    res.json({totalClicks: url.visitHistory.length});
+    res.json({totalClicks: url.visitHistory.length, timeline: url.visitHistory});
   } catch (error) {
     console.log(error);
     res.status(500).json({
