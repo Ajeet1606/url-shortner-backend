@@ -20,8 +20,7 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 //static configuration helps us to store some data like img on your server itself (public folder).
 app.use(express.static("public"));
 
-
-const PORT = 8001;
+const PORT = process.env.PORT || 8001;
 const MONGO_URL = process.env.MONGO_CONNECTION_STRING;
 
 (async () => {
@@ -33,7 +32,7 @@ const MONGO_URL = process.env.MONGO_CONNECTION_STRING;
     app.use(express.json());
     app.use("/", urlRoute);
 
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    app.listen(PORT, () => console.log(`Server running on port http://localhost:${PORT}`));
   } catch (error) {
     console.error("Failed to connect to MongoDB", error);
     process.exit(1);
