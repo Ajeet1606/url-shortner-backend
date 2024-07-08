@@ -18,7 +18,7 @@ async function handleGenerateNewShortUrl(req, res) {
       visitHistory: [],
     });
     res.status(201).json({
-      shortedUrl: `${process.env.BASE_URL}/${shortID}`,
+      uniqueID: shortID,
     });
   } catch (error) {
     console.log(error);
