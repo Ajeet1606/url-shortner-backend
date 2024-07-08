@@ -7,11 +7,8 @@ import cors from "cors";
 dotenv.config();
 
 const app = express();
-const corsOptions = {
-  origin: process.env.CORS_ORIGIN,
-  credentials: true,
-};
-app.use(cors(corsOptions));
+
+app.use(cors());
 //tell server to accept json data, earlier we had to use body-parser but now express handles it auto.
 app.use(express.json({ limit: "16kb" }));
 //to get data from urls, we need to do config of urlencoding.
