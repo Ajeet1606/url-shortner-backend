@@ -1,7 +1,9 @@
 import { nanoid } from "nanoid";
 import URL from "../models/url.model.js";
+import UAParser from "ua-parser-js";
 
 async function handleGenerateNewShortUrl(req, res) {
+
   const shortID = nanoid(8);
   const originalURL = req.body.url;
 
@@ -29,6 +31,14 @@ async function handleGenerateNewShortUrl(req, res) {
 }
 
 async function handleGetShortUrl(req, res) {
+  const ipAddress = req.ip || req.connection.remoteAddress;
+
+  console.log('ipAddress', ipAddress);
+  const userAgent = req.headers['user-agent'];
+  const parser = new UAParser();
+  const uaResult = parser.setUA(userAgent).getResult();
+  console.log('uaResult', uaResult);
+
   const shortId = req.params.shortId;
   try {
     const url = await URL.findOneAndUpdate(
@@ -37,6 +47,10 @@ async function handleGetShortUrl(req, res) {
         $push: {
           visitHistory: {
             timestamp: Date.now(),
+            deviceConfig: {
+              browser: uaResult.browser.name,
+              os: uaResult.os.name,
+            },
           },
         },
       }

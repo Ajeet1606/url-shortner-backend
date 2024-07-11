@@ -14,6 +14,10 @@ const urlSchema = new mongoose.Schema(
     visitHistory: [
       {
         timestamp: { type: Number },
+        deviceConfig: {
+          browser: String,
+          os: String,
+        }
       },
     ],
   },
